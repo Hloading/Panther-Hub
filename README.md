@@ -2,7 +2,9 @@ Panther Hub
 
 Project Overview
 
+Group Members 
 
+Harun Ali, Carlos Mejia De los Santos, Griffin McCue, Niyako Abajebel, Aidyn Kittrell
 
 Panther Hub is a full-stack web application designed to streamline campus events management for students, faculty, and staff. It provides an intuitive platform to view, RSVP, and manage campus events while integrating essential features like GPS coordinates for event locations and notifications for event changes or cancellations.
 
