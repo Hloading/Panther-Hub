@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Explore Events - Event Hub</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="app.js" defer></script>
+</head>
+<body class="explore-events">
+    <header>
+        <nav>
+            <div class="logo">
+                <a href="index.html">
+                    <h1>Event Hub</h1>
+                </a>
+            </div>
+            <ul>
+                <li><a href="#" onclick="redirectHome()">Home</a></li>
+                <li><a href="profile.html">Profile</a></li>
+                <li><a href="my-events.html">My Events</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="event-feed">
+        <h2>Upcoming Events</h2>
+        <ul id="events-list">
+            <!-- Events will be dynamically loaded here -->
+        </ul>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 Event Hub. All rights reserved.</p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            renderEvents();  // Load all events
+        });
+    </script>
+</body>
+</html>
+
