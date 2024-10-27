@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Event Hub - Admin</title>
+  <link rel="stylesheet" href="admin.css">
+</head>
+<body>
+  <!-- Header with Navigation -->
+  <header>
+    <nav class="navbar">
+      <a href="index.html" class="logo">Event Hub</a> <!-- Redirects to the homepage (index.html) -->
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li> <!-- Links to index.html -->
+        <li><a href="events.html">Events</a></li> <!-- Links to events.html -->
+        <li><a href="profile.html">Profile</a></li> <!-- Links to profile.html -->
+        <li><a href="admin.html">Admin</a></li> <!-- Links to admin.html (current page) -->
+        <li><a href="contact.html">Contact</a></li> <!-- Links to contact.html -->
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Admin Panel (Event Creation Form) -->
+  <div class="admin-container">
+    <h2>Create New Event</h2>
+    <form id="createEventForm">
+      <input type="text" id="eventTitle" placeholder="Event Title" required>
+      <input type="date" id="eventDate" required>
+      <textarea id="eventDescription" placeholder="Event Description" required></textarea>
+      <button type="submit">Create Event</button>
+    </form>
+  </div>
+
+  <script src="admin.js"></script>
+</body>
+</html>
