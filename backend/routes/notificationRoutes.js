@@ -1,11 +1,10 @@
-
 const express = require('express');
 const router = express.Router();
 const twilio = require('twilio');
 
 const accountSid = process.env.TWILIO_ACCOUNT_SID;
 const authToken = process.env.TWILIO_AUTH_TOKEN;
-const client = new twilio(accountSid, authToken);
+const client = require('twilio')(accountSid, authToken);
 
 router.post('/send', (req, res) => {
     const { to, message } = req.body;
@@ -20,3 +19,4 @@ router.post('/send', (req, res) => {
 });
 
 module.exports = router;
+

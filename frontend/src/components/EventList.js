@@ -1,35 +1,30 @@
 
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
-import './Event.css';
+import '../styles/Event.css'; // Updated path for Event.css
 
-const EventList = () => {
-    const [events, setEvents] = useState([]);
+const events = [
+    { id: 1, title: "Music Festival", date: "March 20", location: "Campus Park" },
+    { id: 2, title: "Tech Talk", date: "April 15", location: "Main Auditorium" },
+    // Add more events
+];
 
-    useEffect(() => {
-        fetch('/api/events')
-            .then(res => res.json())
-            .then(data => setEvents(data))
-            .catch(err => console.error('Error fetching events:', err));
-    }, []);
-
+function EventList() {
     return (
-        <div className="event-list">
-            <h1>Upcoming Events</h1>
-            {events.length > 0 ? (
-                events.map(event => (
-                    <Link to={`/events/${event._id}`} key={event._id}>
-                        <div className="event-card">
-                            <h2>{event.title}</h2>
-                            <p>{new Date(event.date).toLocaleDateString()}</p>
-                        </div>
-                    </Link>
-                ))
-            ) : (
-                <p>No events available.</p>
-            )}
+        <div>
+            <h2>Upcoming Events</h2>
+            <div className="event-list">
+                {events.map(event => (
+                    <div className="card event-card" key={event.id}>
+                        <h3>{event.title}</h3>
+                        <p>Date: {event.date}</p>
+                        <p>Location: {event.location}</p>
+                        <button>RSVP</button>
+                    </div>
+                ))}
+            </div>
         </div>
     );
-};
+}
 
 export default EventList;

@@ -1,27 +1,31 @@
-
-require('dotenv').config();
+// backend/app.js
+require('dotenv').config({ path: './backend/.env' });
 const express = require('express');
-const mongoose = require('mongoose');
 const cors = require('cors');
-const eventRoutes = require('./routes/eventRoutes');
-const userRoutes = require('./routes/userRoutes');
-const notificationRoutes = require('./routes/notificationRoutes');
+const admin = require('firebase-admin');
+const serviceAccount = require('./firebaseServiceAccountKey.json'); // Firebase Admin SDK credentials
 
 const app = express();
+
+// Initialize Firebase Admin SDK
+admin.initializeApp({
+  credential: admin.credential.cert(serviceAccount),
+  databaseURL: `https://${process.env.FIREBASE_PROJECT_ID}.firebaseio.com`
+});
+
+const db = admin.firestore();
+
 app.use(cors());
 app.use(express.json());
 
-// Database connection
-mongoose.connect(process.env.MONGO_URI, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-}).then(() => console.log('MongoDB connected'))
-  .catch(err => console.error('MongoDB connection error:', err));
+// Import routes
+const notificationRoutes = require('./routes/notificationRoutes');
+const eventRoutes = require('./routes/eventRoutes');
+const userRoutes = require('./routes/userRoutes');
 
-// Routes
+app.use('/api/notifications', notificationRoutes);
 app.use('/api/events', eventRoutes);
 app.use('/api/users', userRoutes);
-app.use('/api/notifications', notificationRoutes);
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`Server running on http://localhost:${PORT}`));

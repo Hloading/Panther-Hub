@@ -4,20 +4,26 @@
   "description": "Campus event management platform with real-time updates and RSVP functionality.",
   "main": "backend/app.js",
   "scripts": {
-    "start": "node backend/app.js",
-    "build": "webpack --mode production",
-    "frontend:start": "webpack serve --mode development"
+    "start": "concurrently \"npm run backend:start\" \"npm run frontend:start\"",
+    "backend:start": "node backend/app.js",
+    "frontend:start": "cd frontend && webpack serve --mode development",
+    "build": "cd frontend && webpack --mode production"
   },
   "dependencies": {
-    "axios": "^0.21.1",
+    "@firebasegen/default-connector": "file:dataconnect-generated/js/default-connector",
+    "admin": "^1.4.1",
+    "axios": "^1.7.7",
     "bcrypt": "^5.1.1",
+    "cors": "^2.8.5",
     "dotenv": "^16.4.5",
     "express": "^4.17.1",
+    "firebase": "^11.0.1",
+    "firebase-admin": "^12.7.0",
     "jsonwebtoken": "^9.0.2",
     "mongoose": "^5.12.3",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
-    "react-router-dom": "^5.2.0",
+    "react-router-dom": "^6.28.0",
     "twilio": "^5.3.5"
   },
   "devDependencies": {
@@ -25,12 +31,13 @@
     "@babel/preset-env": "^7.13.15",
     "@babel/preset-react": "^7.13.13",
     "babel-loader": "^8.2.2",
-    "css-loader": "^5.2.4",
+    "concurrently": "^9.1.0",
+    "css-loader": "^5.2.7",
     "html-webpack-plugin": "^5.3.1",
     "style-loader": "^2.0.0",
-    "webpack": "^5.36.2",
-    "webpack-cli": "^4.6.0",
-    "webpack-dev-server": "^3.11.2"
+    "webpack": "^5.96.1",
+    "webpack-cli": "^5.1.4",
+    "webpack-dev-server": "^5.1.0"
   },
   "author": "Your Name",
   "license": "MIT"
