@@ -1,26 +1,55 @@
-Panther Hub
 
-Project Overview
+# Panther Hub Project
 
-Group Members 
+Panther Hub is a centralized campus event management platform that provides real-time updates, interactive maps, and RSVP functionality for students, faculty, and staff.
 
-Harun Ali, Carlos Mejia De los Santos, Griffin McCue, Niyako Abajebel, Aidyn Kittrell
+## Project Structure
 
-Panther Hub is a full-stack web application designed to streamline campus events management for students, faculty, and staff. It provides an intuitive platform to view, RSVP, and manage campus events while integrating essential features like GPS coordinates for event locations and notifications for event changes or cancellations.
+- **backend/**: Contains server-side code with routes, controllers, models, and configurations.
+- **frontend/**: Includes React components, pages, and styles.
+- **database/**: SQL script for database setup.
+- **dist/**: Contains the production build.
+- **node_modules/**: Installed npm dependencies.
 
-Features
-Event Listings: Displays upcoming campus events with details such as date, time, location, and description.
-GPS Integration: Maps out event locations with GPS coordinates or campus maps for easy navigation.
-RSVP System: Allows users to RSVP for events and track attendance.
-Real-Time Alerts: Provides notifications about event changes, cancellations, or important updates.
-Integration with Other Apps:
-Judging App: Integrated to assist with event evaluations.
-Park Me App: Assists users in finding parking spots for events.
-Technologies Used
-Frontend: HTML, CSS, JavaScript, React
-Backend: Node.js, Express
-Database: MongoDB
-Other Tools:
-Google Maps API for GPS integration
-Twilio for real-time notifications
-GitHub for version control
+## How to Run
+
+1. **Backend**:
+   - Navigate to `backend/`.
+   - Install dependencies: `npm install`.
+   - Start the server: `node app.js` or `npm start`.
+
+2. **Frontend**:
+   - Navigate to `frontend/`.
+   - Install dependencies: `npm install`.
+   - Run the development server: `npm start`.
+
+3. **Build for Production**:
+   - Run `npm run build` to create a production build in `dist/`.
+
+## Environment Variables
+
+### Backend (.env)
+```
+DB_HOST=localhost
+DB_USER=root
+DB_PASSWORD=yourpassword
+DB_NAME=panther_hub
+JWT_SECRET=your_jwt_secret
+TWILIO_ACCOUNT_SID=your_twilio_account_sid
+TWILIO_AUTH_TOKEN=your_twilio_auth_token
+TWILIO_PHONE_NUMBER=your_twilio_phone_number
+```
+
+### Frontend (.env)
+```
+REACT_APP_GOOGLE_MAPS_API_KEY=your_google_maps_api_key
+REACT_APP_BACKEND_URL=http://localhost:5000
+```
+
+## Dependencies
+
+- **Frontend**: React, React Router, Google Maps API
+- **Backend**: Node.js, Express, MongoDB/Mongoose, Twilio for notifications
+
+## License
+This project is open-source and available under the MIT License.

@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "dgSpecHash": "KUDs84AW63W5MT2NvxJYx0ZAN/NjXnPC/po5yIqwMvyDd63v7vAgO00Z1mTjzQbVALuf/xI6/V0f9F92ZcOYtQ==",
+  "success": true,
+  "projectFilePath": "c:\\Users\\ASSIG\\OneDrive\\Documents\\GitHub\\portfolio2\\Panther hub\\Panther hub.sqlproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\ASSIG\\.nuget\\packages\\microsoft.netframework.referenceassemblies\\1.0.0\\microsoft.netframework.referenceassemblies.1.0.0.nupkg.sha512",
+    "C:\\Users\\ASSIG\\.nuget\\packages\\microsoft.netframework.referenceassemblies.net46\\1.0.0\\microsoft.netframework.referenceassemblies.net46.1.0.0.nupkg.sha512"
+  ],
+  "logs": []
+}
