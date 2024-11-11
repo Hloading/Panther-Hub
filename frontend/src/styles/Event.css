@@ -1,3 +1,7 @@
+/* frontend/src/components/Event.css */
+body {
+    background-color: lightblue; /* Temporary style for testing */
+}
 
 .event-card {
     border: 1px solid #ccc;

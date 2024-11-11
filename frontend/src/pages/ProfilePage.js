@@ -1,27 +1,45 @@
 
 import React, { useEffect, useState } from 'react';
+import { getAuth } from 'firebase/auth';
+import { doc, getDoc } from 'firebase/firestore';
+import { db } from '../firebase';
 
 const ProfilePage = () => {
     const [user, setUser] = useState({ name: '', email: '', events: [] });
+    const auth = getAuth();
 
     useEffect(() => {
-        fetch('/api/profile', {
-            method: 'GET',
-            headers: {
-                'Authorization': `Bearer ${localStorage.getItem('token')}`
-            }
-        })
-        .then(res => res.json())
-        .then(data => {
-            if (data.success) {
-                setUser(data.user);
-            } else {
-                alert('Failed to load profile.');
+        const fetchUserProfile = async () => {
+            const currentUser = auth.currentUser;
+
+            if (!currentUser) {
+                alert('You must be logged in to view your profile.');
                 window.location.href = '/login';
+                return;
             }
-        })
-        .catch(err => console.error('Error loading profile:', err));
-    }, []);
+
+            try {
+                // Get the user's profile data from Firestore
+                const userDocRef = doc(db, 'users', currentUser.uid);
+                const userDoc = await getDoc(userDocRef);
+
+                if (userDoc.exists()) {
+                    const userData = userDoc.data();
+                    setUser({
+                        name: userData.name || currentUser.displayName,
+                        email: currentUser.email,
+                        events: userData.events || []
+                    });
+                } else {
+                    alert('User profile not found.');
+                }
+            } catch (err) {
+                console.error('Error loading profile:', err);
+            }
+        };
+
+        fetchUserProfile();
+    }, [auth]);
 
     return (
         <div className="profile-page">
@@ -38,3 +56,4 @@ const ProfilePage = () => {
 };
 
 export default ProfilePage;
+
