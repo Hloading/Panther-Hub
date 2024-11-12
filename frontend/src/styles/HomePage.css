@@ -20,10 +20,13 @@
     background-color: #0056b3;
 }
 
-.auth-options {
+.user-actions,
+.auth-options,
+.guest-options {
     display: flex;
     justify-content: center;
     gap: 20px;
+    flex-wrap: wrap;
 }
 
 .welcome-message {
