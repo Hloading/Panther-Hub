@@ -1,17 +1,15 @@
 // backend/routes/notificationRoutes.js
-require('dotenv').config({ path: './backend.env' });
-// backend/routes/notificationRoutes.js
+
 const express = require('express');
 const router = express.Router();
 const { body, validationResult } = require('express-validator');
 const twilio = require('twilio');
-const authenticate = require('../middleware/authMiddleware');
 const rateLimit = require('express-rate-limit');
 const path = require('path');
-
-// Ensure environment variables are loaded
+const { authenticateToken } = require('../middleware/authMiddleware');
 require('dotenv').config({ path: path.resolve(__dirname, '../backend.env') });
 
+// Twilio setup
 const accountSid = process.env.TWILIO_ACCOUNT_SID;
 const authToken = process.env.TWILIO_AUTH_TOKEN;
 const twilioPhoneNumber = process.env.TWILIO_PHONE_NUMBER;
@@ -22,13 +20,10 @@ if (!accountSid || !authToken || !twilioPhoneNumber) {
 
 const client = twilio(accountSid, authToken);
 
-// Apply authentication middleware to all routes in this router
-router.use(authenticate);
-
-// Rate limiter for notification route
+// Rate limiter for the notification route
 const notificationLimiter = rateLimit({
   windowMs: 15 * 60 * 1000, // 15 minutes
-  max: 10, // Limit each user to 10 requests per windowMs
+  max: 10, // Limit each IP to 10 requests per windowMs
   message: {
     success: false,
     message: 'Too many requests, please try again later.',
@@ -36,6 +31,9 @@ const notificationLimiter = rateLimit({
   standardHeaders: true,
   legacyHeaders: false,
 });
+
+// Apply authenticateToken middleware to all routes in this router
+router.use(authenticateToken);
 
 /**
  * POST /api/notifications/send
@@ -45,7 +43,7 @@ router.post(
   '/send',
   notificationLimiter,
   [
-    // Input validation middleware
+    // Input validation
     body('to')
       .notEmpty()
       .withMessage('Recipient phone number is required')

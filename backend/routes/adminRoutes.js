@@ -5,11 +5,11 @@ const router = express.Router();
 const admin = require('firebase-admin');
 const { authenticateToken, checkIfAdmin } = require('../middleware/authMiddleware');
 
-// Add console logs to verify middleware functions
-console.log('Type of authenticateToken:', typeof authenticateToken); // Should be 'function'
-console.log('Type of checkIfAdmin:', typeof checkIfAdmin);           // Should be 'function'
+// Apply authenticateToken middleware to all routes in this router
+router.use(authenticateToken);
 
-router.post('/setCustomClaims', authenticateToken, checkIfAdmin, async (req, res) => {
+// Route to set custom claims, only accessible by admins
+router.post('/setCustomClaims', checkIfAdmin, async (req, res) => {
   try {
     const { uid, claims } = req.body;
 
@@ -24,6 +24,11 @@ router.post('/setCustomClaims', authenticateToken, checkIfAdmin, async (req, res
     console.error('Error setting custom claims:', error);
     res.status(500).json({ error: 'Failed to set custom claims.' });
   }
+});
+
+// Test route to verify middleware execution
+router.get('/test', checkIfAdmin, (req, res) => {
+  res.send('Admin route is working with authentication middleware.');
 });
 
 module.exports = router;

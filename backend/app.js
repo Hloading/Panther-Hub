@@ -1,37 +1,41 @@
 // backend/app.js
-const path = require('path');
-require('dotenv').config({ path: path.resolve(__dirname, 'backend.env') });
+
 const express = require('express');
-const cors = require('cors');
-const adminRoutes = require('./routes/adminRoutes');
-//const admin = require('firebase-admin');
-const { admin, db } = require('./firebase');
-
 const app = express();
+const path = require('path');
+const admin = require('firebase-admin');
+const serviceAccount = require('./firebaseServiceAccountKey.json');
+const adminRoutes = require('./routes/adminRoutes');
+const notificationRoutes = require('./routes/notificationRoutes');
 
-//const db = admin.firestore();
+// Initialize Firebase Admin SDK
+admin.initializeApp({
+  credential: admin.credential.cert(serviceAccount),
+});
 
-app.use(cors());
+// Middleware to parse JSON bodies
 app.use(express.json());
 
-// Import routes
-const notificationRoutes = require('./routes/notificationRoutes');
-const eventRoutes = require('./routes/eventRoutes');
-const userRoutes = require('./routes/userRoutes');
-//const adminRoutes = requite('./routes/adminRoutes');
-
-app.use('/api/notifications', notificationRoutes);
-app.use('/api/events', eventRoutes);
-app.use('/api/users', userRoutes);
+// Use routes
 app.use('/api/admin', adminRoutes);
+app.use('/api/notifications', notificationRoutes);
 
-// Error handling middleware
+// Default route
+app.get('/', (req, res) => {
+  res.send('Server is running');
+});
+
+// Error handling middleware (optional)
 app.use((err, req, res, next) => {
   console.error(err.stack);
-  res.status(err.status || 500).json({ message: err.message || 'Internal Server Error' });
+  res.status(500).send('Something broke!');
 });
 
 const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => console.log(`Server running on http://localhost:${PORT}`));
+
+// Start the server
+app.listen(PORT, () => {
+  console.log(`Server running on http://localhost:${PORT}`);
+});
 
 module.exports = app;
