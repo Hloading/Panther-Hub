@@ -1,5 +1,5 @@
 specVersion: "v1beta"
-serviceId: "portfolio2"
+serviceId: "Panther-Hub"
 location: "us-central1"
 schema:
   source: "./schema"
@@ -7,6 +7,6 @@ schema:
     postgresql:
       database: "fdcdb"
       cloudSql:
-        instanceId: "portfolio2-fdc"
+        instanceId: "Panther-Hub-fdc"
       # schemaValidation: "COMPATIBLE"
 connectorDirs: ["./connector"]

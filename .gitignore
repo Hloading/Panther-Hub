@@ -63,7 +63,11 @@ node_modules/
 .yarn-integrity
 
 # dotenv environment variables file
-.env
+backend.env
+frontend.env
 
 # dataconnect generated files
 .dataconnect
+
+#Firebase key json
+firebaseServiceAccountKey.json

@@ -2,7 +2,7 @@ const { getDataConnect, validateArgs } = require('firebase/data-connect');
 
 const connectorConfig = {
   connector: 'default',
-  service: 'portfolio2',
+  service: 'Panther-Hub',
   location: 'us-central1'
 };
 exports.connectorConfig = connectorConfig;

@@ -32,3 +32,50 @@ button {
 button:hover {
     background-color: #0056b3;
 }
+
+
+.event-list-container {
+    padding: 20px;
+  }
+  
+  .event-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+  
+  .event-card {
+    border: 1px solid #ccc;
+    padding: 15px;
+    width: 300px;
+  }
+  
+  .event-image {
+    width: 100%;
+    height: auto;
+  }
+  
+  .details-link {
+    display: inline-block;
+    margin-top: 10px;
+    color: #fff;
+    background-color: #007bff;
+    padding: 10px 15px;
+    text-decoration: none;
+    border-radius: 5px;
+  }
+  
+  .details-link:hover {
+    background-color: #0056b3;
+  }
+  
+  .success-message {
+    color: green;
+    margin-top: 10px;
+  }
+  
+  .error-message {
+    color: red;
+    margin-top: 10px;
+  }
+  
